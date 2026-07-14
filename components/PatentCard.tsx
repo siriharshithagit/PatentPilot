@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type Patent = {
   title: string;
   patent_number: string;
@@ -44,7 +46,9 @@ export default function PatentCard({ patent }: Props) {
       </div>
 
       <div className="mt-4">
-        <h3 className="font-semibold text-lg">Compound Information</h3>
+        <h3 className="font-semibold text-lg">
+          Compound Information
+        </h3>
 
         <p className="text-gray-700 whitespace-pre-line">
           {patent.abstract}
@@ -59,6 +63,30 @@ export default function PatentCard({ patent }: Props) {
         <p className="text-gray-700 whitespace-pre-line">
           {patent.ai_summary}
         </p>
+      </div>
+
+      <div className="mt-6 flex justify-end">
+        <Link
+          href={`/report?title=${encodeURIComponent(
+            patent.title
+          )}&patent_number=${encodeURIComponent(
+            patent.patent_number
+          )}&publication_date=${encodeURIComponent(
+            patent.publication_date
+          )}&assignee=${encodeURIComponent(
+            patent.assignee
+          )}&abstract=${encodeURIComponent(
+            patent.abstract
+          )}&source=${encodeURIComponent(
+            patent.source
+          )}&score=${patent.score}&ai_summary=${encodeURIComponent(
+            patent.ai_summary
+          )}`}
+        >
+          <button className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+            📄 View Report
+          </button>
+        </Link>
       </div>
     </div>
   );
